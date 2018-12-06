@@ -6,6 +6,12 @@ var path = require('path'); // helpers para directorios
 
 var routes = require('./routes');
 
+// Setar configs para o PUG - template engine
+app.set('view engine', 'pug');
+
+
+
+
 // os middlwares têm de estar em cima de todas asa rotas
 app.use((req, res, next) => {
     req.name = 'adicionei o nome na requisição usando o middleware';
@@ -18,7 +24,11 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.get('/', function(req, res){
-    res.send('Root');
+    // renderizar template
+    res.render('index', {
+        message: 'Olá Mundo from express js',
+    })
+    //res.send('Root');
 });
 
 app.get('/world', function(req, res){
